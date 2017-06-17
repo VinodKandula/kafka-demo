@@ -1,4 +1,6 @@
+# we are using group management to assign topic partitions to consumers so we need a group
 spring:
   kafka:
     consumer:
       group-id: my-group-id
+      

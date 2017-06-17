@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
+ *
+ * Keys are used to determine the partition within a log to which a message get's appended to.
+ * Splitting a log into partitions allows to scale-out the system.
+ *
  * @author Zoltan Altfatter
  */
 
@@ -14,7 +18,7 @@ import java.util.Date;
 public class Producer {
 
     // Spring’s KafkaTemplate is auto-configured
-    private final KafkaTemplate kafkaTemplate;
+    private final KafkaTemplate<Integer, String> kafkaTemplate;
 
     public Producer(KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
