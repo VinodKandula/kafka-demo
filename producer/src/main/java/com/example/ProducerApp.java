@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class KafkaDemoApplication {
+public class ProducerApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(KafkaDemoApplication.class, args);
+		SpringApplication.run(ProducerApp.class, args);
 	}
 }
