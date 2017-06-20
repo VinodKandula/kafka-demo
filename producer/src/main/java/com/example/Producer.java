@@ -1,10 +1,10 @@
 package com.example;
 
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.converter.StringJsonMessageConverter;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 /**
  *
@@ -22,11 +22,14 @@ public class Producer {
 
     public Producer(KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
+        kafkaTemplate.setMessageConverter(new StringJsonMessageConverter());
     }
 
     @Scheduled(fixedDelay = 1000)
     public void send() {
-        kafkaTemplate.send("test", "Haliho" + new Date());
+        BankTransfer bankTransfer = new BankTransfer("123", "234", 100L);
+
+        kafkaTemplate.send(new GenericMessage<>(bankTransfer));
     }
 
 }

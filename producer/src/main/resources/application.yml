@@ -1,0 +1,5 @@
+spring:
+  kafka:
+    template:
+      default-topic: bank-transfers
+
