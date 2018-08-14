@@ -2,9 +2,11 @@ package com.example;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
-import org.springframework.messaging.support.GenericMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
+import java.util.UUID;
 
 /**
  *
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class Producer {
 
     // Spring’s KafkaTemplate is auto-configured
-    private final KafkaTemplate<Integer, String> kafkaTemplate;
+    private final KafkaTemplate<Integer, BankTransfer> kafkaTemplate;
 
     public Producer(KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
@@ -27,9 +29,10 @@ public class Producer {
 
     @Scheduled(fixedDelay = 1000)
     public void send() {
-        BankTransfer bankTransfer = new BankTransfer("123", "234", 100L);
+        BankTransfer bankTransfer = new BankTransfer(UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(), new Random().nextLong());
 
-        kafkaTemplate.send(new GenericMessage<>(bankTransfer));
+        kafkaTemplate.send("bank-transfers", bankTransfer);
     }
 
 }

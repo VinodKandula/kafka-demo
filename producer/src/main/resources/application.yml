@@ -1,5 +1,4 @@
 spring:
   kafka:
-    template:
-      default-topic: bank-transfers
-
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
