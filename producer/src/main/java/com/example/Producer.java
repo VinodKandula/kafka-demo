@@ -24,7 +24,6 @@ public class Producer {
 
     public Producer(KafkaTemplate kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
-        kafkaTemplate.setMessageConverter(new StringJsonMessageConverter());
     }
 
     @Scheduled(fixedDelay = 1000)
