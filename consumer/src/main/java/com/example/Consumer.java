@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Consumer {
 
-    @KafkaListener(topics = "bank-transfers", containerFactory = "jsonKafkaListenerContainerFactory")
+    @KafkaListener(topics = "bank-transfers")
     public void handle(@Payload BankTransfer bankTransfer) {
         System.out.println(bankTransfer);
     }
